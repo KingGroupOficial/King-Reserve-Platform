@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KingReserveBack")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e0692249565171790d7f52f0798dd40135de64bf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+14502c5898b7752bd709bd5e14a6a80b26e6d8ae")]
 [assembly: System.Reflection.AssemblyProductAttribute("KingReserveBack")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KingReserveBack")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
