@@ -1,0 +1,6 @@
+@KingReserveBack_HostAddress = http://localhost:5151
+
+GET {{KingReserveBack_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
