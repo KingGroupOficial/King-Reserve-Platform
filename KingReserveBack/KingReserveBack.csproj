@@ -18,7 +18,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="PersonAdministration\Application\" />
       <Folder Include="ReserveAdministration\Application\" />
     </ItemGroup>
 

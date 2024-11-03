@@ -6,7 +6,9 @@ using KingReserveBack.ReserveAdministration.Domain.Services;
 
 namespace KingReserveBack.ReserveAdministration.Internal.QueryServices;
 
-public class ReserveQueryService(IReserveRepository reserveRepository): IReserveQueryService
+public class ReserveQueryService(
+    IReserveRepository reserveRepository): 
+    IReserveQueryService
 {
     public async Task<IEnumerable<Room>> Handle(GetAllRoomByReserveIdQuery query)
     {

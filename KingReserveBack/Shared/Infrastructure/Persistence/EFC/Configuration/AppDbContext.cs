@@ -1,4 +1,5 @@
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
+using KingReserveBack.PersonAdministration.Domain.Model.Entities;
 using KingReserveBack.ReserveAdministration.Domain.Model.Aggregates.Reserve;
 using KingReserveBack.ReserveAdministration.Domain.Model.Entities;
 using KingReserveBack.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
@@ -36,6 +37,18 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         builder.Entity<Room>().Property(r => r.Area).HasMaxLength(8);
         builder.Entity<Room>().Property(r => r.Status).IsRequired().HasMaxLength(50); 
         
+        //Properties for Person
+        builder.Entity<Person>().HasKey(p => p.Id);
+        builder.Entity<Person>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Person>().Property(p => p.Name).IsRequired().HasMaxLength(50);
+        builder.Entity<Person>().Property(p=> p.Age).IsRequired();
+        builder.Entity<Person>().Property(p => p.Date).IsRequired();
+        builder.Entity<Person>().Property(p => p.Country).IsRequired().HasMaxLength(50);
+        builder.Entity<Person>().Property(p => p.City).IsRequired().HasMaxLength(50);
+        builder.Entity<Person>().Property(p => p.District).IsRequired().HasMaxLength(50);
+        builder.Entity<Person>().Property(p => p.Observations).HasMaxLength(100);
+        builder.Entity<Person>().Property(p => p.RoomId).IsRequired();
+        
         
         //Relationships Bounded Context ReserveAdministration
         builder.Entity<Reserve>().HasMany(c => c.Rooms);
@@ -53,6 +66,21 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
                 v => v.ToDateTime(TimeOnly.MinValue),
                 v => DateOnly.FromDateTime(v)
             );
+        
+        // Relationships Bounded Context PersonAdministration
+        builder.Entity<Person>()
+            .Property(c => c.Date)
+            .HasConversion(
+                v => v.ToDateTime(TimeOnly.MinValue),
+                v => DateOnly.FromDateTime(v)
+            );
+
+        // Ensure RoomId references an existing Room
+        builder.Entity<Person>()
+            .HasOne<Room>()
+            .WithMany()
+            .HasForeignKey(p => p.RoomId)
+            .IsRequired();
         
         
         builder.UseSnakeCaseNamingConvention();

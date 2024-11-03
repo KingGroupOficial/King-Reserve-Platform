@@ -8,7 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KingReserveBack.ReserveAdministration.Infrastructure.Persistence.EFC.Repositories;
 
-public class ReserveRepository(AppDbContext context): BaseRepository<Reserve>(context), IReserveRepository
+public class ReserveRepository(AppDbContext context): 
+    BaseRepository<Reserve>(context), IReserveRepository
 {
     public async Task<IEnumerable<Reserve>> 
         FindByUserIdAsync(UserId userId)

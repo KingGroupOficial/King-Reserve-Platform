@@ -1,8 +1,10 @@
+using KingReserveBack.PersonAdministration.Domain.Model.Commands;
+
 namespace KingReserveBack.PersonAdministration.Domain.Model.Entities;
 
 public partial class Person
 {
-    public string Id { get; set; }
+    public int Id { get; set; }
     public string Name { get; set; }
     public int Age { get; set; }
     public DateOnly Date { get; set; }
@@ -30,4 +32,14 @@ public partial class Person
         Observations = observations;
         RoomId = roomId;
     }
+    
+    public Person(CreatePersonCommand command)
+        : this(command.Name, 
+            command.Age, 
+            command.Date,
+            command.Country,
+            command.City,
+            command.District,
+            command.Observations,
+            command.RoomId){}
 }

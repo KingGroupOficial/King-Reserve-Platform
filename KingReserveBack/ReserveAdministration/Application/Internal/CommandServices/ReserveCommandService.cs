@@ -12,7 +12,8 @@ public class ReserveCommandService : IReserveCommandService
     private readonly IReserveRepository _reserveRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public ReserveCommandService(IReserveRepository reserveRepository, IUnitOfWork unitOfWork)
+    public ReserveCommandService(IReserveRepository reserveRepository,
+        IUnitOfWork unitOfWork)
     {
         _reserveRepository = reserveRepository;
         _unitOfWork = unitOfWork;

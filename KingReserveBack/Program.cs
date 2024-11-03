@@ -1,3 +1,8 @@
+using KingReserveBack.PersonAdministration.Application.Internal.CommandServices;
+using KingReserveBack.PersonAdministration.Application.Internal.QueryServices;
+using KingReserveBack.PersonAdministration.Domain.Repositories;
+using KingReserveBack.PersonAdministration.Domain.Services;
+using KingReserveBack.PersonAdministration.Infrastructure.Persistence.EFC.Repositories;
 using KingReserveBack.ReserveAdministration.Domain.Repositories;
 using KingReserveBack.ReserveAdministration.Domain.Services;
 using KingReserveBack.ReserveAdministration.Infrastructure.Persistence.EFC.Repositories;
@@ -82,6 +87,10 @@ builder.Services.AddScoped<IReserveRepository, ReserveRepository>();
 builder.Services.AddScoped<IReserveCommandService, ReserveCommandService>();
 builder.Services.AddScoped<IReserveQueryService, ReserveQueryService>();
 
+// PersonAdministration Bounded Context Dependency Injection Configuration
+builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+builder.Services.AddScoped<IPersonCommandService, PersonCommandService>();
+builder.Services.AddScoped<IPersonQueryService, PersonQueryService>();
 
 var app = builder.Build();
 
