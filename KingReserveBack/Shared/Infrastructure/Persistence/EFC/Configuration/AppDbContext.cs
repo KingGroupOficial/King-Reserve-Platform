@@ -3,6 +3,7 @@ using KingReserveBack.PersonAdministration.Domain.Model.Entities;
 using KingReserveBack.ReserveAdministration.Domain.Model.Aggregates.Reserve;
 using KingReserveBack.ReserveAdministration.Domain.Model.Entities;
 using KingReserveBack.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
+using KingReserveBack.StaffManagement.Domain.Model.Aggregates;
 using Microsoft.EntityFrameworkCore;
 
 namespace KingReserveBack.Shared.Infrastructure.Persistence.EFC.Configuration;
@@ -48,6 +49,19 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         builder.Entity<Person>().Property(p => p.District).IsRequired().HasMaxLength(50);
         builder.Entity<Person>().Property(p => p.Observations).HasMaxLength(100);
         builder.Entity<Person>().Property(p => p.RoomId).IsRequired();
+        
+        // Properties for Staff
+        builder.Entity<Staff>().HasKey(e => e.Id);
+        builder.Entity<Staff>().Property(e => e.Name).IsRequired().HasMaxLength(50);
+        builder.Entity<Staff>().Property(e => e.Last_name).IsRequired().HasMaxLength(50);
+        builder.Entity<Staff>().Property(e => e.Job_description).IsRequired().HasMaxLength(50);
+          
+        builder.Entity<Staff>().Property(e => e.Email).IsRequired().HasMaxLength(50);
+        builder.Entity<Staff>().Property(e => e.Reserves_id).IsRequired().HasMaxLength(50);
+        builder.Entity<Staff>().Property(e => e.On_job_status).IsRequired().HasMaxLength(20);
+            
+        
+        
         
         
         //Relationships Bounded Context ReserveAdministration

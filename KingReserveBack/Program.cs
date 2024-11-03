@@ -12,6 +12,11 @@ using KingReserveBack.Shared.Domain.Repositories;
 using KingReserveBack.Shared.Infrastructure.Interfaces.ASP.Configuration;
 using KingReserveBack.Shared.Infrastructure.Persistence.EFC.Configuration;
 using KingReserveBack.Shared.Infrastructure.Persistence.EFC.Repositories;
+using KingReserveBack.StaffManagement.Application.Internal.CommandServices;
+using KingReserveBack.StaffManagement.Application.Internal.QueryServices;
+using KingReserveBack.StaffManagement.Domain.Repositories;
+using KingReserveBack.StaffManagement.Domain.Services;
+using KingReserveBack.StaffManagement.Infrastructure.Persistence.EFC.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -91,6 +96,11 @@ builder.Services.AddScoped<IReserveQueryService, ReserveQueryService>();
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<IPersonCommandService, PersonCommandService>();
 builder.Services.AddScoped<IPersonQueryService, PersonQueryService>();
+
+//StaffManagement Bounded Context Dependency Injections
+builder.Services.AddScoped<IStaffRepository, StaffRepository>();
+builder.Services.AddScoped<IStaffCommandService, StaffCommandService>();
+builder.Services.AddScoped<IStaffQueryService, StaffQueryService>();
 
 var app = builder.Build();
 
