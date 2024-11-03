@@ -1,11 +1,33 @@
 namespace KingReserveBack.PersonAdministration.Domain.Model.Entities;
 
-public class Person
+public partial class Person
 {
-    public int Id { get; }
-    public string Name { get; private set; }
-    public DateOnly FechaReserva { get; private set; }
-    public string Pais { get; private set; }
-    public string Ciudad { get; private set; }
-    public string Distrito  { get; private set; }
+    public string Id { get; set; }
+    public string Name { get; set; }
+    public int Age { get; set; }
+    public DateOnly Date { get; set; }
+    public string Country { get; set; }
+    public string City { get; set; }
+    public string District { get; set; }
+    public string Observations { get; set; }
+    public int RoomId { get; set; }
+    
+    public Person(string name,
+        int age,
+        DateOnly date,
+        string country,
+        string city,
+        string district,
+        string observations,
+        int roomId)
+    {
+        Name = name;
+        Age = age;
+        Date = date;
+        Country = country;
+        City = city;
+        District = district;
+        Observations = observations;
+        RoomId = roomId;
+    }
 }

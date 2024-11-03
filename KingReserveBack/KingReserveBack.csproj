@@ -19,14 +19,6 @@
 
     <ItemGroup>
       <Folder Include="PersonAdministration\Application\" />
-      <Folder Include="PersonAdministration\Domain\Model\Aggregates\" />
-      <Folder Include="PersonAdministration\Domain\Model\Commands\" />
-      <Folder Include="PersonAdministration\Domain\Model\Queries\" />
-      <Folder Include="PersonAdministration\Domain\Model\ValuesObjects\" />
-      <Folder Include="PersonAdministration\Domain\Repositories\" />
-      <Folder Include="PersonAdministration\Domain\Services\" />
-      <Folder Include="PersonAdministration\Infrastructure\" />
-      <Folder Include="PersonAdministration\Interface\" />
       <Folder Include="ReserveAdministration\Application\" />
     </ItemGroup>
 
