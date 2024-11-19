@@ -1,4 +1,5 @@
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
+using KingReserveBack.IAM.Domain.Model.Aggregates;
 using KingReserveBack.PersonAdministration.Domain.Model.Entities;
 using KingReserveBack.ReserveAdministration.Domain.Model.Aggregates.Reserve;
 using KingReserveBack.ReserveAdministration.Domain.Model.Entities;
@@ -96,6 +97,11 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
             .HasForeignKey(p => p.RoomId)
             .IsRequired();
         
+        // IAM Context
+        builder.Entity<User>().HasKey(u => u.Id);
+        builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<User>().Property(u => u.Username).IsRequired();
+        builder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
         
         builder.UseSnakeCaseNamingConvention();
     }
