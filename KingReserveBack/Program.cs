@@ -1,3 +1,13 @@
+using KingReserveBack.IAM.Application.Internal.CommandServices;
+using KingReserveBack.IAM.Application.Internal.OutboundServices;
+using KingReserveBack.IAM.Application.Internal.QueryServices;
+using KingReserveBack.IAM.Domain.Model.Services;
+using KingReserveBack.IAM.Domain.Repositories;
+using KingReserveBack.IAM.Infrastructure.Hashing.BCrypt.Services;
+using KingReserveBack.IAM.Infrastructure.Persistence.EFC.Repositories;
+using KingReserveBack.IAM.Infrastructure.Pipeline.Middleware.Extensions;
+using KingReserveBack.IAM.Infrastructure.Tokens.JWT.Configuration;
+using KingReserveBack.IAM.Infrastructure.Tokens.JWT.Services;
 using KingReserveBack.PersonAdministration.Application.Internal.CommandServices;
 using KingReserveBack.PersonAdministration.Application.Internal.QueryServices;
 using KingReserveBack.PersonAdministration.Domain.Repositories;
@@ -48,20 +58,21 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // OpenAPI/Swagger Configuration
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+// builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(
     c =>
     {
         c.SwaggerDoc("v1",
             new OpenApiInfo
             {
-                Title = "King.Reserve.Backend.API",
+                Title = "KING GROUP.KING RESERVE.API",
                 Version = "v1",
-                Description = "King Group Platform API",
+                Description = "KING RESERVE Platform API",
                 // TermsOfService = new Uri("https://acme-learning.com/tos"),
                 Contact = new OpenApiContact
                 {
-                    Name = "King Group",
-                    Email = "maycoljhordan07@gmail.com"
+                    Name = "KING RESERVE",
+                    Email = "contact@pecuario.com"
                 },
                 License = new OpenApiLicense
                 {
@@ -69,7 +80,32 @@ builder.Services.AddSwaggerGen(
                     Url = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")
                 }
             });
+        c.EnableAnnotations();
+        c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+        {
+            In = ParameterLocation.Header,
+            Description = "Please enter token",
+            Name = "Authorization",
+            Type = SecuritySchemeType.Http,
+            BearerFormat = "JWT",
+            Scheme = "bearer"
+        });
+        c.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Id = "Bearer",
+                        Type = ReferenceType.SecurityScheme
+                    }
+                },
+                Array.Empty<string>()
+            } 
+        });
     });
+
 
 //Add CORS Policy
 
@@ -102,6 +138,16 @@ builder.Services.AddScoped<IStaffRepository, StaffRepository>();
 builder.Services.AddScoped<IStaffCommandService, StaffCommandService>();
 builder.Services.AddScoped<IStaffQueryService, StaffQueryService>();
 
+// IAM Bounded Context Injection Configuration
+builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserCommandService, UserCommandService>();
+builder.Services.AddScoped<IUserQueryService, UserQueryService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IHashingService, HashingService>();
+// builder.Services.AddScoped<IIamContextFacade, IamContextFacade>();
+
+
 var app = builder.Build();
 
 
@@ -124,6 +170,8 @@ if (app.Environment.IsDevelopment())
 
 // Apply CORS Policy
 app.UseCors("AllowedAllPolicy");
+//Add Authorization Middleware 
+app.UseRequestAuthorization();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
