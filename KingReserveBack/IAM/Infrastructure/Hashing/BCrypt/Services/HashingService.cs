@@ -1,6 +1,5 @@
 ﻿using KingReserveBack.IAM.Application.Internal.OutboundServices;
 using BCryptNet=BCrypt.Net.BCrypt;
-
 namespace KingReserveBack.IAM.Infrastructure.Hashing.BCrypt.Services;
 
 public class HashingService : IHashingService

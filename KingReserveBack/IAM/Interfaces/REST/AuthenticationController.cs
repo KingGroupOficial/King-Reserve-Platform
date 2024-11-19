@@ -1,8 +1,8 @@
 ﻿using System.Net.Mime;
 using KingReserveBack.IAM.Domain.Model.Services;
+using KingReserveBack.IAM.Infrastructure.Pipeline.Middleware.Attributes;
 using KingReserveBack.IAM.Interfaces.REST.Resources;
 using KingReserveBack.IAM.Interfaces.REST.Transform;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KingReserveBack.IAM.Interfaces.REST;
