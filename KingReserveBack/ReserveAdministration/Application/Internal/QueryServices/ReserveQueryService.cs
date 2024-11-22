@@ -4,7 +4,7 @@ using KingReserveBack.ReserveAdministration.Domain.Model.Queries;
 using KingReserveBack.ReserveAdministration.Domain.Repositories;
 using KingReserveBack.ReserveAdministration.Domain.Services;
 
-namespace KingReserveBack.ReserveAdministration.Internal.QueryServices;
+namespace KingReserveBack.ReserveAdministration.Application.Internal.QueryServices;
 
 public class ReserveQueryService(
     IReserveRepository reserveRepository): 
@@ -34,7 +34,7 @@ public class ReserveQueryService(
     {
         return await reserveRepository.ListAsync();
     }
-
+    
     public  async Task<IEnumerable<Reserve>> Handle(GetAllReserveByUserIdQuery query)
     {
         return await reserveRepository.FindByUserIdAsync(query.UserId);
