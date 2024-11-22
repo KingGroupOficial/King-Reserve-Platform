@@ -22,10 +22,12 @@ public class ReserveController(
         CreateReserveResource createReserveResource)
     {
         var createReserveCommand =
-            CreateReserveCommandFromResourceAssembler.ToCommandFromResource(createReserveResource);
+            CreateReserveCommandFromResourceAssembler
+                .ToCommandFromResource(createReserveResource);
         var reserve = await reserveCommandService.Handle(createReserveCommand);
         if (reserve is null) return BadRequest();
-        var resource = ReserveResourceFromEntityAssembler.ToResourceFromEntity(reserve);
+        var resource = ReserveResourceFromEntityAssembler
+            .ToResourceFromEntity(reserve);
         return CreatedAtAction(nameof(GetReserveById), new { reserveId = resource.Id }, resource);
     }
     
@@ -105,7 +107,9 @@ public class ReserveController(
     {
         var getAllReserveQuery = new GetAllReserveQuery();
         var reserves = await reserveQueryService.Handle(getAllReserveQuery);
-        var reserveResources = reserves.Select(ReserveResourceFromEntityAssembler.ToResourceFromEntity);
+        var reserveResources = reserves
+            .Select(ReserveResourceFromEntityAssembler
+                .ToResourceFromEntity);
         return Ok(reserveResources);
     }
     

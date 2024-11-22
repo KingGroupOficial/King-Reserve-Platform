@@ -1,7 +1,10 @@
 using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
+using KingReserveBack.IAM.Domain.Model.Aggregates;
+using KingReserveBack.PersonAdministration.Domain.Model.Entities;
 using KingReserveBack.ReserveAdministration.Domain.Model.Aggregates.Reserve;
 using KingReserveBack.ReserveAdministration.Domain.Model.Entities;
 using KingReserveBack.Shared.Infrastructure.Persistence.EFC.Configuration.Extensions;
+using KingReserveBack.StaffManagement.Domain.Model.Aggregates;
 using Microsoft.EntityFrameworkCore;
 
 namespace KingReserveBack.Shared.Infrastructure.Persistence.EFC.Configuration;
@@ -36,6 +39,31 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
         builder.Entity<Room>().Property(r => r.Area).HasMaxLength(8);
         builder.Entity<Room>().Property(r => r.Status).IsRequired().HasMaxLength(50); 
         
+        //Properties for Person
+        builder.Entity<Person>().HasKey(p => p.Id);
+        builder.Entity<Person>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Person>().Property(p => p.Name).IsRequired().HasMaxLength(50);
+        builder.Entity<Person>().Property(p=> p.Age).IsRequired();
+        builder.Entity<Person>().Property(p => p.Date).IsRequired();
+        builder.Entity<Person>().Property(p => p.Country).IsRequired().HasMaxLength(50);
+        builder.Entity<Person>().Property(p => p.City).IsRequired().HasMaxLength(50);
+        builder.Entity<Person>().Property(p => p.District).IsRequired().HasMaxLength(50);
+        builder.Entity<Person>().Property(p => p.Observations).HasMaxLength(100);
+        builder.Entity<Person>().Property(p => p.RoomId).IsRequired();
+        
+        // Properties for Staff
+        builder.Entity<Staff>().HasKey(e => e.Id);
+        builder.Entity<Staff>().Property(e => e.Name).IsRequired().HasMaxLength(50);
+        builder.Entity<Staff>().Property(e => e.Last_name).IsRequired().HasMaxLength(50);
+        builder.Entity<Staff>().Property(e => e.Job_description).IsRequired().HasMaxLength(50);
+          
+        builder.Entity<Staff>().Property(e => e.Email).IsRequired().HasMaxLength(50);
+        builder.Entity<Staff>().Property(e => e.Reserves_id).IsRequired().HasMaxLength(50);
+        builder.Entity<Staff>().Property(e => e.On_job_status).IsRequired().HasMaxLength(20);
+            
+        
+        
+        
         
         //Relationships Bounded Context ReserveAdministration
         builder.Entity<Reserve>().HasMany(c => c.Rooms);
@@ -54,6 +82,26 @@ public class AppDbContext(DbContextOptions options) : DbContext(options)
                 v => DateOnly.FromDateTime(v)
             );
         
+        // Relationships Bounded Context PersonAdministration
+        builder.Entity<Person>()
+            .Property(c => c.Date)
+            .HasConversion(
+                v => v.ToDateTime(TimeOnly.MinValue),
+                v => DateOnly.FromDateTime(v)
+            );
+
+        // Ensure RoomId references an existing Room
+        builder.Entity<Person>()
+            .HasOne<Room>()
+            .WithMany()
+            .HasForeignKey(p => p.RoomId)
+            .IsRequired();
+        
+        // IAM Context
+        builder.Entity<User>().HasKey(u => u.Id);
+        builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<User>().Property(u => u.Username).IsRequired();
+        builder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
         
         builder.UseSnakeCaseNamingConvention();
     }

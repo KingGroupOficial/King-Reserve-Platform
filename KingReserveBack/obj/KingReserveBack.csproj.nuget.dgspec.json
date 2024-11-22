@@ -1,26 +1,29 @@
 {
   "format": 1,
   "restore": {
-    "/Users/alumnos/Rider-WS51/KingReserve/KingReserveBack/KingReserveBack.csproj": {}
+    "C:\\Users\\ASUS\\Documents\\GitHub\\King-Reserve-Platform\\KingReserveBack\\KingReserveBack.csproj": {}
   },
   "projects": {
-    "/Users/alumnos/Rider-WS51/KingReserve/KingReserveBack/KingReserveBack.csproj": {
+    "C:\\Users\\ASUS\\Documents\\GitHub\\King-Reserve-Platform\\KingReserveBack\\KingReserveBack.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/alumnos/Rider-WS51/KingReserve/KingReserveBack/KingReserveBack.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Documents\\GitHub\\King-Reserve-Platform\\KingReserveBack\\KingReserveBack.csproj",
         "projectName": "KingReserveBack",
-        "projectPath": "/Users/alumnos/Rider-WS51/KingReserve/KingReserveBack/KingReserveBack.csproj",
-        "packagesPath": "/Users/alumnos/.nuget/packages/",
-        "outputPath": "/Users/alumnos/Rider-WS51/KingReserve/KingReserveBack/obj/",
+        "projectPath": "C:\\Users\\ASUS\\Documents\\GitHub\\King-Reserve-Platform\\KingReserveBack\\KingReserveBack.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\Documents\\GitHub\\King-Reserve-Platform\\KingReserveBack\\obj\\",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
-          "/Users/alumnos/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,6 +47,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
             "EntityFrameworkCore.CreatedUpdatedDate": {
               "target": "Package",
               "version": "[8.0.0, )"
@@ -51,6 +58,10 @@
             "Humanizer": {
               "target": "Package",
               "version": "[2.14.1, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.6, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -64,6 +75,14 @@
               "target": "Package",
               "version": "[1.1.6, )"
             },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[7.6.0, )"
+            },
             "MySql.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.2, )"
@@ -75,6 +94,10 @@
             "Swashbuckle.AspNetCore.Annotations": {
               "target": "Package",
               "version": "[6.5.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[7.6.0, )"
             }
           },
           "imports": [
@@ -96,7 +119,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
